@@ -6,7 +6,11 @@
 
 ###
 
-The Lime Package Manager is a lightweight and intuitive package manager designed to give you access to the repositories of countless other package managers all in one place. Its goal is to provide a clean and clear overview of available packages, ranked from most reputable to least reputable, making it easy to discover and install software from a variety of sources.
+This lightweight and intuitive package manager is designed to provide access to 
+the repositories of numerous other package managers, all in one place. Its goal 
+is to offer a clean and clear overview of available packages, ranked from most 
+reputable to least reputable, simplifying the process of discovering and 
+installing software from various sources.
 
 > **NOTE:** This project is still in development and is not ready for use.
 
@@ -30,10 +34,21 @@ Once the dependencies are installed, you can build the project by running:
 make
 ```
 
-## Usage
+This will compile the source code and generate an executable in the `./bin`
+directory.
 
-The `pkg` executable provides a command-line interface. Below are some example commands:
+You can now run the package manager. Below is an example command:
 
 ```bash
 ./pkg install <package-name>
 ```
+
+## License
+
+This project is licensed under the GPL-3.0 License. This license reflects our 
+commitment to ensuring that this software remains free and open-source. 
+We believe in the values of freedom, transparency, and collaboration that the 
+GPL-3.0 promotes, allowing users to freely use, modify, and distribute the 
+software, ensuring that it remains a community-driven project.
+
+For more details, see the `LICENSE.md` file.
