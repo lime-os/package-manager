@@ -40,7 +40,7 @@ directory.
 You can now run the package manager. Below is an example command:
 
 ```bash
-./pkg install <package-name>
+./bin/lime-os-pkg install <package-name>
 ```
 
 ## License

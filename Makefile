@@ -1,43 +1,30 @@
-# Compiler and Flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Iinclude
-LDFLAGS = -lcurl -lncurses -lcjson
+CFLAGS = -Wall -Wextra -O2
+LIBS = -lcurl -lncurses -lcjson
 
-# Directories
 SRCDIR = src
 OBJDIR = obj
-INCDIR = include
+BINDIR = bin
 
-# Source and Object Files
-SOURCES = $(wildcard $(SRCDIR)/*.c)
-OBJECTS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SOURCES))
+TARGET = $(BINDIR)/lime-os-pkg
 
-# Target Executable
-TARGET = pkg
+SOURCES = $(shell find $(SRCDIR) -name '*.c')
+OBJECTS = $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
-# Debugging
-DEBUG ?= 0
-ifeq ($(DEBUG), 1)
-    CFLAGS += -g
-endif
-
-# Build Rules
-.PHONY: all clean
+INCLUDES = $(shell find $(SRCDIR) -type d -exec printf "-I{} " \;)
+CFLAGS += $(INCLUDES)
 
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	@echo "Linking $(TARGET)..."
-	$(CC) -o $@ $^ $(LDFLAGS)
+	@mkdir -p $(BINDIR)
+	$(CC) $(OBJECTS) -o $@ $(LIBS)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	@echo "Compiling $<..."
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Create Object Directory
-$(OBJDIR):
-	@mkdir -p $(OBJDIR)
-
 clean:
-	@echo "Cleaning up..."
-	rm -rf $(OBJDIR) $(TARGET)
+	rm -rf $(OBJDIR) $(BINDIR)
+
+.PHONY: all clean
